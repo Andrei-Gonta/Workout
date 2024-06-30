@@ -1,6 +1,5 @@
 ﻿using Data_Base_Access.Entities;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Data_Base_Access.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,0 +1,89 @@
+﻿@page "/users"
+@using SmartWorkout.DataAccess
+@using SmartWorkout.DataAccess.Entities
+@using SmartWorkout.DataAccess.Repositories.UserRepository
+@attribute [StreamRendering]
+
+
+<PageTitle>Users</PageTitle>
+
+<h1>Users</h1>
+
+<p>This component shows data of all USERS.</p>
+
+
+
+
+
+
+
+@if (UsersList == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Phone number</th>
+                <th>Email</th>
+                <th>Age</th>
+                <th>Weight</th>
+                <th> Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in UsersList)
+            {
+                <tr>
+                    <td>@user.Id</td>
+                    <td>@user.Name</td>
+                    <td>@user.Surname</td>
+                    <td>@user.Phone</td>
+                    <td>@user.Email</td>
+                    <td>@user.Age</td>
+                    <td>@user.Weight</td>
+                    <td>
+                        <button @onclick="() => DeleteUser(user.Id)"> Delete </button>
+                        <button>Modify</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    public [] UsersList;
+    public IEnumerable<> Users;
+
+
+    public static SmartWorkoutContext DbContext = new SmartWorkoutContext();
+
+    public UserRepository userRepository = new UserRepository(DbContext);
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Simulate asynchronous loading to demonstrate streaming rendering
+        await Task.Delay(500);
+
+        // Retrieve the list of users from the database
+
+
+
+        Users = await userRepository.GetAllAsync();
+        UsersList = Users.ToArray();
+
+    }
+
+    public async void DeleteUser(int id)
+    {
+        await userRepository.DeleteByIdAsync(id);
+    }
+
+
+}

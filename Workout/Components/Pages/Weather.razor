@@ -1,9 +1,10 @@
 ﻿@page "/weather"
 @attribute [StreamRendering]
-
+@rendermode InteractiveServer
 <PageTitle>Weather</PageTitle>
 
 <h1>Weather</h1>
+ 
 
 <p>This component demonstrates showing data.</p>
 
@@ -36,8 +37,22 @@ else
     </table>
 }
 
+<!--
+<button class="btn btn-primary" @onclick="MaxTemperature">Show Max Temperature</button>
+<p role="status">Max Temperature: @maxTemperatureC</p>
+-->
+
+<Max></Max>
+
+<button class="btn btn-primary" @onclick="MinTemperature">Show Min Temperature</button>
+<p role="status">Min Temperature: @minTemperatureC</p>
+
 @code {
     private WeatherForecast[]? forecasts;
+    public int minTemperatureC = 0;
+    public int maxTemperatureC = 0;
+
+
 
     protected override async Task OnInitializedAsync()
     {
@@ -54,11 +69,43 @@ else
         }).ToArray();
     }
 
+   /* private void MaxTemperature()
+     {
+         maxTemperatureC = forecasts[0].TemperatureC;
+         for (int i = 0; i < forecasts.Length; i++)
+         {
+             if (forecasts[i].TemperatureC > maxTemperatureC)
+             {
+                 maxTemperatureC = forecasts[i].TemperatureC;
+             }
+
+         }
+     }
+     */
+
+    private void MinTemperature()
+    {
+        minTemperatureC = forecasts[0].TemperatureC;
+        for (int i = 0; i < forecasts.Length; i++)
+        {
+            if (forecasts[i].TemperatureC < minTemperatureC)
+            {
+                minTemperatureC = forecasts[i].TemperatureC;
+            }
+
+        }
+    }
+
+
     private class WeatherForecast
     {
         public DateOnly Date { get; set; }
         public int TemperatureC { get; set; }
         public string? Summary { get; set; }
         public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+
+
+   
+    
     }
 }

@@ -62,9 +62,9 @@ else
     public IEnumerable<> Users;
 
 
-    public static SmartWorkoutContext DbContext = new SmartWorkoutContext();
+    
 
-    public UserRepository userRepository = new UserRepository(DbContext);
+    public UsersRepository userRepository = new UserRepository(DbContext);
 
     protected override async Task OnInitializedAsync()
     {

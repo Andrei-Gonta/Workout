@@ -1,4 +1,5 @@
 ﻿using Data_Base_Access.Entities;
+using Data_Base_Access.Repositories.NewFolder.IGenericRepository;
 using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Data_Base_Access.Repositories.UserRepository
 {
-    public interface IUserRepository : IDisposable
+    public interface IUserRepository : IGenericRepository<Users>
     {
         public Task<List<Users>> GetAllAsync();
         Task<Users> GetByIdAsync(int id);

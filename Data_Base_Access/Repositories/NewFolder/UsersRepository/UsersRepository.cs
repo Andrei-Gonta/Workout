@@ -7,10 +7,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Data_Base_Access.Repositories.UserRepository;
 using Data_Base_Access;
+using Data_Base_Access.Repositories.NewFolder.IGenericRepository;
+using System.Collections;
 
 namespace Data_Base_Access.Repositories.UsersRepository
 {
-    public class UserRepository : IUserRepository, IDisposable
+    public class UserRepository : IGenericRepository<Users>, IDisposable
     {
 
         private WorkoutContext context;
@@ -19,13 +21,13 @@ namespace Data_Base_Access.Repositories.UsersRepository
             this.context = context;
         }
 
-        public async Task AddAsync(Users user)
+        public  async Task Add(Users entity)
         {
-            await context.Users.AddAsync(user);
+            await context.Users.AddAsync(entity);
         }
 
 
-        public async Task DeleteByIdAsync(int id)
+        public async void Delete(int id)
         {
             var user = await context.Users.FindAsync(id);
             if (user != null)
@@ -35,30 +37,38 @@ namespace Data_Base_Access.Repositories.UsersRepository
             }
         }
 
+
         public void Dispose()
         {
-            throw new NotImplementedException();
+            return;
         }
 
-        public async Task<List<Users>> GetAllAsync()
+        public async Task<IEnumerable<Users>> GetAll()
         {
             return await context.Users.ToListAsync();
         }
-        public async Task<Users> GetByIdAsync(int id)
+
+
+        public async Task<Users> GetByID(int id)
         {
             return await context.Users.FindAsync(id);
-
         }
 
-        public void update(Users user)
+        
+
+        public async void Update(Users user)
         {
             context.Entry(user).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
         }
 
-        public async Task UpdateAsync(Users user)
+        Task<Users> IGenericRepository<Users>.Add(Users entity)
         {
-            context.Users.Update(user);
-            await context.SaveChangesAsync();
+            throw new NotImplementedException();
+        }
+
+        Task<Users> IGenericRepository<Users>.Update(Users entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

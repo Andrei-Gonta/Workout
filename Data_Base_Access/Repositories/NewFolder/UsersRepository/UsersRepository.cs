@@ -21,11 +21,7 @@ namespace Data_Base_Access.Repositories.UsersRepository
             this.context = context;
         }
 
-        public  async Task Add(Users entity)
-        {
-            await context.Users.AddAsync(entity);
-        }
-
+        
 
         public async void Delete(int id)
         {
@@ -54,21 +50,40 @@ namespace Data_Base_Access.Repositories.UsersRepository
             return await context.Users.FindAsync(id);
         }
 
-        
 
-        public async void Update(Users user)
+
+       
+
+
+
+       async Task<Users> IGenericRepository<Users>.UpdateAsync(Users entity)
         {
-            context.Entry(user).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            context.Set<Users>().Entry(entity).State = EntityState.Modified;
+            await context.SaveChangesAsync();
+            return entity;
         }
 
-        Task<Users> IGenericRepository<Users>.Add(Users entity)
+        public void Save()
         {
-            throw new NotImplementedException();
+            context.SaveChanges();
         }
 
-        Task<Users> IGenericRepository<Users>.Update(Users entity)
+
+         async Task IGenericRepository<Users>.AddAsync(Users item)
         {
-            throw new NotImplementedException();
+            await context.Users.AddAsync(item);
+            context.SaveChangesAsync();
+
+                
+        }
+
+        async Task IGenericRepository<Users>.DeleteAsync(int id)
+        {
+            var aux = await context.Set<Users>().FindAsync(id);
+
+                context.Set<Users>().Remove(aux);
+                await context.SaveChangesAsync();
+            
         }
     }
 }

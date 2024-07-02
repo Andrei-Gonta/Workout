@@ -12,12 +12,16 @@ namespace Data_Base_Access.Repositories.NewFolder.IGenericRepository
     {
 
         Task<IEnumerable<T>> GetAll();
+        
         Task<T> GetByID(int id);
-        Task<T> Add( T entity);
 
-        Task<T> Update(T entity);
+        Task AddAsync(T item);
 
-        void Delete(int id);
+        Task<T> UpdateAsync(T item);
+
+        Task DeleteAsync(int id);
+
+        public void Save();
 
 
 

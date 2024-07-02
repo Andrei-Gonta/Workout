@@ -1,13 +1,16 @@
 ﻿@page "/users"
-@using Workout.Data_Base_Access
+@using Data_Base_Access
 @using Data_Base_Access.Entities
-@using Data_Base_Access.Repositories.NewFolder.UserRepository
+@using Data_Base_Access.Repositories.NewFolder.IGenericRepository
+@using Data_Base_Access.Repositories.UserRepository
+@using Data_Base_Access.Repositories.UsersRepository
+@using Microsoft.EntityFrameworkCore
 @attribute [StreamRendering]
-
+@inject IGenericRepository<Users> userRepository
 
 <PageTitle>Users</PageTitle>
 
-<h1>Users</h1>
+<h3>TestPage</h3>
 
 <p>This component shows data of all USERS.</p>
 
@@ -48,8 +51,7 @@ else
                     <td>@user.Age</td>
                     <td>@user.Weight</td>
                     <td>
-                        <button @onclick="() => DeleteUser(user.Id)"> Delete </button>
-                        <button>Modify</button>
+                      
                     </td>
                 </tr>
             }
@@ -58,13 +60,11 @@ else
 }
 
 @code {
-    public [] UsersList;
-    public IEnumerable<> Users;
-
+    public Users [] UsersList;
+    public IEnumerable<Users> User;
+    public static WorkoutContext context;
 
     
-
-    public UsersRepository userRepository = new UserRepository(DbContext);
 
     protected override async Task OnInitializedAsync()
     {
@@ -77,18 +77,11 @@ else
         Console.WriteLine("Hello World!");
 
 
-        Users = await userRepository.GetAllAsync();
-        UsersList = Users.ToArray();
+        User = await userRepository.GetAll();
+        UsersList = User.ToArray();
         Console.WriteLine("altceva");
 
 
 
     }
-
-    public async void DeleteUser(int id)
-    {
-        await userRepository.DeleteByIdAsync(id);
     }
-
-
-}

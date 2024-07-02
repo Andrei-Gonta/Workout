@@ -1,0 +1,73 @@
+﻿@page "/adduser"
+@using Data_Base_Access
+@using Data_Base_Access.Entities
+@using Data_Base_Access.Repositories.NewFolder.IGenericRepository
+@using Data_Base_Access.Repositories.UserRepository
+@using Data_Base_Access.Repositories.UsersRepository
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Web
+@attribute [StreamRendering]
+@inject IGenericRepository<Users> userRepository
+@inject NavigationManager NavigationManager
+
+
+<h1>AddUser</h1>
+
+<EditForm Model="newUser" OnSubmit="Submit" FormName="AddUser">
+    <div>
+        <label>
+            Name: 
+            <InputText @bind-Value="newUser!.Name"></InputText>
+        </label>
+    </div>
+    <div>
+        <label>
+            Email:
+            <InputText @bind-Value="newUser!.Email" />
+        </label>
+    </div>
+    <div>
+        <label>
+            Phone number:
+            <InputNumber @bind-Value="newUser!.Phone" />
+        </label>
+    </div>
+    <div>
+        <label>
+            Weight:
+            <InputNumber @bind-Value="newUser!.Weight" />
+        </label>
+    </div>
+    <div>
+        <label>
+            Age:
+            <InputNumber @bind-Value="newUser!.Age" />
+        </label>
+    </div>
+    <div><button type="submit">Create User</button></div>
+</EditForm>
+
+
+
+
+
+
+@code 
+{
+    
+    [SupplyParameterFromForm]
+    public Users newUser { get; set; }
+    protected override void OnInitialized() => newUser ??= new();
+    private void Submit()
+    {
+        if (newUser != null)    
+        {
+          userRepository.AddAsync(newUser);
+          userRepository.Save();
+          NavigationManager.NavigateTo("testpage");
+        }
+    }
+}
+    
+

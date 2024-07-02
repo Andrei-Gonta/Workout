@@ -55,7 +55,12 @@ else
             }
         </tbody>
     </table>
+
+    <button @onclick="() => DeleteUser(user.Id)"> Delete </button>
+    <button>Modify</button>
 }
+
+
 
 @code {
     public [] UsersList;

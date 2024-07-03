@@ -1,0 +1,50 @@
+﻿@page "/addexercise"
+@using Data_Base_Access
+@using Data_Base_Access.Entities
+@using Data_Base_Access.Repositories.NewFolder.IGenericRepository
+@using Data_Base_Access.Repositories.NewFolder.ExercisesRepository
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Web
+@attribute [StreamRendering]
+
+@inject IGenericRepository<Exercises> exRepository
+@inject NavigationManager NavigationManager
+
+
+<h1>AddExercise</h1>
+
+<EditForm Model="newExercise" OnSubmit="Submit" FormName="AddExercise">
+    <div>
+        <label>
+            Name:
+            <InputText @bind-Value="newExercise!.Ex_Name" />
+        </label>
+    </div>
+    
+    <div><button type="submit">Create Exercise</button></div>
+</EditForm>
+
+
+
+
+
+
+@code
+{
+
+    [SupplyParameterFromForm]
+    public Exercises newExercise { get; set; }
+    protected override void OnInitialized() => newExercise ??= new();
+    private async Task Submit()
+    {
+        if (newExercise != null)
+        {
+            await exRepository.AddAsync(newExercise);
+
+            NavigationManager.NavigateTo("/exercicespage");
+        }
+    }
+}
+
+

@@ -21,7 +21,7 @@ namespace Data_Base_Access.Repositories.NewFolder.IGenericRepository
 
         Task DeleteAsync(int id);
 
-        public void Save();
+        
 
 
 

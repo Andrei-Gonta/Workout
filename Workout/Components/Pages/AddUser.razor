@@ -18,7 +18,13 @@
     <div>
         <label>
             Name: 
-            <InputText @bind-Value="newUser!.Name"></InputText>
+            <InputText @bind-Value="newUser!.Name"/> 
+        </label>
+    </div>
+    <div>
+        <label>
+            Surname:
+            <InputText @bind-Value="newUser!.Surname" />
         </label>
     </div>
     <div>
@@ -30,7 +36,7 @@
     <div>
         <label>
             Phone number:
-            <InputNumber @bind-Value="newUser!.Phone" />
+            <InputText @bind-Value="newUser!.Phone" />
         </label>
     </div>
     <div>
@@ -59,13 +65,13 @@
     [SupplyParameterFromForm]
     public Users newUser { get; set; }
     protected override void OnInitialized() => newUser ??= new();
-    private void Submit()
+    private async Task Submit()
     {
         if (newUser != null)    
         {
-          userRepository.AddAsync(newUser);
-          userRepository.Save();
-          NavigationManager.NavigateTo("testpage");
+         await userRepository.AddAsync(newUser);
+          
+          NavigationManager.NavigateTo("/testpage");
         }
     }
 }

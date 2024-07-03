@@ -8,6 +8,7 @@
 @using Microsoft.AspNetCore.Components
 @using Microsoft.AspNetCore.Components.Web
 @attribute [StreamRendering]
+@rendermode InteractiveServer
 @inject IGenericRepository<Users> userRepository
 @inject NavigationManager NavigationManager
 
@@ -44,8 +45,7 @@ else
             @foreach (var user in UsersList)
             {
                 <tr>
-                    <td><button @onclick="(() => Delete(user))">Delete</button></td>
-                    <td><button @onclick="GoToEditUser">Edit</button></td>
+                   
                     <td>@user.Id</td>
                     <td>@user.Name</td>
                     <td>@user.Surname</td>
@@ -53,23 +53,22 @@ else
                     <td>@user.Email</td>
                     <td>@user.Age</td>
                     <td>@user.Weight</td>
-                    <td>
-                      
-                    </td>
+                    <td><button @onclick="@(() => Delete(user))">Delete</button></td>
+                    <td><button @onclick="GoToEditUser">Edit</button></td>
                 </tr>
             }
         </tbody>
     </table>
 
 
-    <button class="btn btn-primary"  @onclick="Navigate">Add User</button>
-    <button class="btn btn-primary" href="/adduser">Add User</button>
+    <button class="btn btn-primary" @onclick="@(() => GoToAddUser())">Add User</button>
+    
 
 }
 
 @code {
     public Users [] UsersList;
-    public IEnumerable<Users> User;
+    public IEnumerable<Users> Users;
     public static WorkoutContext context;
 
 
@@ -78,22 +77,26 @@ else
     {
 
         await Task.Delay(500);
-        User = await userRepository.GetAll();
-        UsersList = User.ToArray();
+        Users = await userRepository.GetAll();
+        UsersList = Users.ToArray();
 
     }
 
-    public void Navigate()
+    public void GoToAddUser()
     {
         NavigationManager.NavigateTo("/adduser");
     }
 
-    void Delete(Users user)
+    async Task Delete(Users user)
     {
-        userRepository.DeleteAsync(user.Id);
-        userRepository.Save();
-        UsersList = User.ToArray();     
+        
+        await userRepository.DeleteAsync(user.Id);
+        UsersList = Users.ToArray();
+        await Task.Delay(100);
+
+
     }
+
 
     void GoToEditUser()
     {

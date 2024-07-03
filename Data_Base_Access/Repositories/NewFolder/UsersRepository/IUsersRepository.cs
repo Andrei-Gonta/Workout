@@ -1,5 +1,6 @@
 ﻿using Data_Base_Access.Entities;
 using Data_Base_Access.Repositories.NewFolder.IGenericRepository;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;

@@ -1,0 +1,95 @@
+﻿@page "/exercicespage"
+@using Data_Base_Access
+@using Data_Base_Access.Entities
+@using Data_Base_Access.Repositories.NewFolder.IGenericRepository
+@using Data_Base_Access.Repositories.NewFolder.ExercisesRepository
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Web
+@attribute [StreamRendering]
+@rendermode InteractiveServer
+@inject IGenericRepository<Exercises> exRepository
+@inject NavigationManager NavigationManager
+
+<PageTitle>Exercises</PageTitle>
+
+<h3>Exercises</h3>
+
+<p></p>
+
+@if (ExercisesList == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Ex_Name</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ex in ExercisesList)
+            {
+                <tr>
+
+                    <td>@ex.Id</td>
+                    <td>@ex.Ex_Name</td>
+                    <th> Actions</th>
+                    <td><button @onclick="@(() => Delete(ex))">Delete</button></td>
+                    <td><button @onclick="@GoToEditExercise">Edit</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+    <button class="btn btn-primary" @onclick="@(() => GoToAddExercise())">Add Exercise</button>
+    
+
+}
+
+
+
+
+@code {
+
+    public Exercises[] ExercisesList;
+    public IEnumerable<Exercises> Exercises;
+    public static WorkoutContext context;
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        await Task.Delay(500);
+        Exercises = await exRepository.GetAll();
+        ExercisesList = Exercises.ToArray();
+
+    }
+
+    public void GoToAddExercise()
+    {
+        NavigationManager.NavigateTo("/addexercise");
+    }
+
+    async Task Delete(Exercises ex)
+    {
+        await exRepository.DeleteAsync(ex.Id);
+        ExercisesList = Exercises.ToArray();
+        await Task.Delay(100);
+    }
+
+    void GoToEditExercise()
+    {
+
+        NavigationManager.NavigateTo("/editexercise");
+    }
+
+
+}
+

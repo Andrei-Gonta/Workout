@@ -12,7 +12,7 @@ using System.Collections;
 
 namespace Data_Base_Access.Repositories.UsersRepository
 {
-    public class UserRepository : IGenericRepository<Users>, IDisposable
+    public class UserRepository : IGenericRepository<Users>
     {
 
         private WorkoutContext context;
@@ -23,22 +23,19 @@ namespace Data_Base_Access.Repositories.UsersRepository
 
         
 
-        public async void Delete(int id)
+        public async Task Delete(int id)
         {
             var user = await context.Users.FindAsync(id);
             if (user != null)
             {
                 context.Users.Remove(user);
                 await context.SaveChangesAsync();
+                //GetAll();
             }
         }
 
 
-        public void Dispose()
-        {
-            return;
-        }
-
+       
         public async Task<IEnumerable<Users>> GetAll()
         {
             return await context.Users.ToListAsync();
@@ -63,7 +60,7 @@ namespace Data_Base_Access.Repositories.UsersRepository
             return entity;
         }
 
-        public void Save()
+        public async void Save()
         {
             context.SaveChanges();
         }
@@ -72,7 +69,7 @@ namespace Data_Base_Access.Repositories.UsersRepository
          async Task IGenericRepository<Users>.AddAsync(Users item)
         {
             await context.Users.AddAsync(item);
-            context.SaveChangesAsync();
+            await context.SaveChangesAsync();
 
                 
         }

@@ -9,6 +9,8 @@ using Data_Base_Access.Repositories.UserRepository;
 using Data_Base_Access;
 using Data_Base_Access.Repositories.NewFolder.IGenericRepository;
 using System.Collections;
+using System.Linq.Expressions;
+
 
 namespace Data_Base_Access.Repositories.UsersRepository
 {
@@ -47,13 +49,17 @@ namespace Data_Base_Access.Repositories.UsersRepository
             return await context.Users.FindAsync(id);
         }
 
+        public Users GetID(int id)
+        {
+            return context.Set<Users>().Find(id);
+        }
 
 
-       
 
 
 
-       async Task<Users> IGenericRepository<Users>.UpdateAsync(Users entity)
+
+        async Task<Users> IGenericRepository<Users>.UpdateAsync(Users entity)
         {
             context.Set<Users>().Entry(entity).State = EntityState.Modified;
             await context.SaveChangesAsync();
@@ -82,5 +88,12 @@ namespace Data_Base_Access.Repositories.UsersRepository
                 await context.SaveChangesAsync();
             
         }
+
+        public Task<List<Users>> GetAllWithInclude(params Expression<Func<Users, object>>[] includeProperties)
+        {
+            throw new NotImplementedException();
+        }
+
+        
     }
 }

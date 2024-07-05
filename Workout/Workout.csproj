@@ -21,6 +21,7 @@
     <_ContentIncludedByDefault Remove="Components\Pages\Component.razor" />
     <_ContentIncludedByDefault Remove="Components\Pages\Users.razor" />
     <_ContentIncludedByDefault Remove="Components\Pages\UsersTable.razor" />
+    <_ContentIncludedByDefault Remove="wwwroot\bootstrap\style.css" />
   </ItemGroup>
 
   <ItemGroup>

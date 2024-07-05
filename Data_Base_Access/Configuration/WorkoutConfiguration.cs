@@ -15,7 +15,9 @@ namespace Data_Base_Access.Configuration
         {
             builder.ToTable("Workout").HasKey(u => u.Id);
 
+
             builder.Property(w => w.Date).IsRequired();
+            
 
             builder.HasOne(w => w.User).WithMany(u => u.Workouts).HasForeignKey(w => w.CientID); //optional nume
         }

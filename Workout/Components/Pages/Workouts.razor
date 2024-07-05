@@ -1,0 +1,81 @@
+﻿@page "/workouts"
+@using Data_Base_Access
+@using Data_Base_Access.Entities
+@using Data_Base_Access.Repositories.NewFolder.IGenericRepository
+@using Data_Base_Access.Repositories.WorkoutRepository
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Web
+@attribute [StreamRendering]
+@rendermode InteractiveServer
+@inject IGenericRepository<Workout> workoutRepository
+@inject NavigationManager NavigationManager
+
+
+
+
+<h3>DisplayWorkout for User <var></var></h3>
+
+@if (WorkoutsList == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Client ID</th>
+                <th>Duration</th>
+                <th>Date</th>
+                <th>User</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var workout in WorkoutsList)
+            {
+                <tr>
+
+                    <td>@workout.Id</td>
+                    <td>@workout.CientID</td>
+                    <td>@workout.Duration</td>
+                    <td>@workout.Date</td>
+                    <td>@workout.User</td>
+                    <td>
+                        <button class="btn-edit">View Info</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+    <button class="btn btn-primary btn-add" @onclick="@(() => GoToAddWorkout())">Add Workout</button>
+
+
+}
+
+@code
+{
+    public List<Workout> WorkoutsList;
+
+    public static WorkoutContext context;
+    public int id_client;
+    protected override async Task OnInitializedAsync()
+    {
+
+        await Task.Delay(500);
+       
+        //id_client= 
+        WorkoutsList = await workoutRepository.GetAllWithInclude(w => w.User);
+
+    }
+
+    public void GoToAddWorkout()
+    {
+        NavigationManager.NavigateTo("/addworkout");
+    }
+
+}

@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -51,6 +52,16 @@ namespace Data_Base_Access.Repositories.NewFolder.ExercisesRepository
             context.Set<Exercises>().Entry(entity).State = EntityState.Modified;
             await context.SaveChangesAsync();
             return entity;
+        }
+
+        public Task<List<Exercises>> GetAllWithInclude(params Expression<Func<Exercises, object>>[] includeProperties)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Users GetID(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

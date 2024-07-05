@@ -1,0 +1,74 @@
+﻿body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+form {
+    background: #fff;
+    padding: 15px; /* Add some padding to the form */
+    border-radius: 5px; /* Round the corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    max-width: 100px; /* Constrain the form width */
+    width: 50%;
+}
+
+.form-group {
+    margin-bottom: 8px; /* Reduce margin */
+}
+
+    .form-group label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 2px; /* Reduce margin */
+        font-size: 0.85em; /* Smaller font size */
+    }
+
+.form-control {
+    width: 60%;
+    padding: 4px; /* Reduce padding */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.8em; /* Smaller font size */
+    line-height: 1.2; /* Smaller line height */
+    
+}
+
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: #007bff;
+    border: 1px solid #007bff;
+    padding: 0.25rem 0.5rem; /* Smaller padding */
+    font-size: 0.8rem; /* Smaller font size */
+    line-height: 1.2; /* Smaller line height */
+    border-radius: 0.2rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #004085;
+    }

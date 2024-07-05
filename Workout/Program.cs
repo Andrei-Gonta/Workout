@@ -1,11 +1,9 @@
 using Data_Base_Access;
 using Data_Base_Access.Entities;
-using Data_Base_Access.Repositories;
-using Data_Base_Access.Repositories.UsersRepository;
-using Data_Base_Access.Repositories.NewFolder.IGenericRepository;
-using Data_Base_Access.Repositories.UserRepository;
-using Data_Base_Access.Repositories.UsersRepository;
 using Data_Base_Access.Repositories.NewFolder.ExercisesRepository;
+using Data_Base_Access.Repositories.NewFolder.IGenericRepository;
+using Data_Base_Access.Repositories.UsersRepository;
+using Data_Base_Access.Repositories.WorkoutRepository;
 using Workout.Components;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +16,9 @@ builder.Services.AddRazorComponents()
 builder.Services.AddDbContext<WorkoutContext>();
 builder.Services.AddScoped<IGenericRepository<Users>, UserRepository>();
 builder.Services.AddScoped<IGenericRepository<Exercises>, ExercisesRrepository>();
+builder.Services.AddScoped<IGenericRepository<Data_Base_Access.Entities.Workout >, WorkoutRepository>();
+
+
 
 
 var app = builder.Build();

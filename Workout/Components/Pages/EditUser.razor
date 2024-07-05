@@ -51,15 +51,19 @@
 
 
 @code {
-    private Users modUser = new Users();
-
+    private Users modUser;
+    private Users aux;
     public int userID { get; set; }
 
     protected override void OnInitialized() => modUser ??= new();
 
     private async Task Submit()
     {
+            
+        
+        modUser = userRepository.GetID(userID);
         await userRepository.UpdateAsync(modUser);
         NavigationManager.NavigateTo("/users");
     }
 }
+

@@ -15,43 +15,43 @@
 <h1>AddUser</h1>
 
 <EditForm Model="newUser" OnSubmit="Submit" FormName="AddUser">
-    <div>
+    <div class="form-control">
         <label>
             Name: 
-            <InputText @bind-Value="newUser!.Name"/> 
+            <InputText @bind-Value="newUser!.Name" class="form-control" />
         </label>
     </div>
-    <div>
+    <div class="form-control">
         <label>
             Surname:
-            <InputText @bind-Value="newUser!.Surname" />
+            <InputText @bind-Value="newUser!.Surname" class="form-control" />
         </label>
     </div>
-    <div>
+    <div class="form-control">
         <label>
             Email:
-            <InputText @bind-Value="newUser!.Email" />
+            <InputText @bind-Value="newUser!.Email" class="form-control" />
         </label>
     </div>
-    <div>
+    <div class="form-control">
         <label>
             Phone number:
-            <InputText @bind-Value="newUser!.Phone" />
+            <InputText @bind-Value="newUser!.Phone" class="form-control" />
         </label>
     </div>
-    <div>
+    <div class="form-control">
         <label>
             Weight:
-            <InputNumber @bind-Value="newUser!.Weight" />
+            <InputNumber @bind-Value="newUser!.Weight" class="form-control" />
         </label>
     </div>
-    <div>
+    <div    >
         <label>
             Age:
-            <InputNumber @bind-Value="newUser!.Age" />
+            <InputNumber @bind-Value="newUser!.Age" class="form-control" />
         </label>
     </div>
-    <div><button type="submit">Create User</button></div>
+    <div><button type="submit" class="btn btn-primary">Add User</button></div>
 </EditForm>
 
 

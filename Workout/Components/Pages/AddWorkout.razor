@@ -1,0 +1,58 @@
+﻿@page "/addworkout"
+@using Data_Base_Access
+@using Data_Base_Access.Entities
+@using Data_Base_Access.Repositories.NewFolder.IGenericRepository
+@using Data_Base_Access.Repositories.NewFolder.ExercisesRepository
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Web
+@attribute [StreamRendering]
+@inject IGenericRepository<Users> userRepository
+@inject IGenericRepository<Workout> workoutRepository
+@inject NavigationManager NavigationManager
+
+
+<h1>AddWorkout</h1>
+
+<EditForm Model="newWorkout" OnSubmit="Submit" FormName="AddWorkout">
+    <div class="form-control">
+        <label>
+            Duration (Minutes):   
+            <InputNumber @bind-Value="newWorkout!.Duration" class="form-control" />
+        </label>
+    </div>
+    <div class="form-control">
+        <label>
+            Date
+            <input type="date" min="" 2013-01-08"" @bind="newWorkout!.Date" class="form-control" />
+        </label>
+    </div>
+
+    <div><button type="submit" class="btn btn-primary">Add Workout</button></div>
+</EditForm>
+
+
+
+
+
+
+@code
+{
+
+    [SupplyParameterFromForm]
+    public Workout newWorkout { get; set; }
+    public Users auxUser;
+    protected override void OnInitialized() => newWorkout ??= new();
+    private async Task Submit()
+    {
+        if (newWorkout != null)
+        {
+            //newWorkout.CientID=
+            await workoutRepository.AddAsync(newWorkout);
+
+            NavigationManager.NavigateTo("/workouts");
+        }
+    }
+}
+
+

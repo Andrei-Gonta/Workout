@@ -2,6 +2,7 @@
 @using Data_Base_Access
 @using Data_Base_Access.Entities
 @using Data_Base_Access.Repositories.NewFolder.IGenericRepository
+@using Data_Base_Access.Repositories.WorkoutRepository
 @using Data_Base_Access.Repositories.UserRepository
 @using Data_Base_Access.Repositories.UsersRepository
 @using Microsoft.EntityFrameworkCore
@@ -10,9 +11,14 @@
 @attribute [StreamRendering]
 @rendermode InteractiveServer
 @inject IGenericRepository<Users> userRepository
+
 @inject NavigationManager NavigationManager
 
 <PageTitle>Users</PageTitle>
+<head>
+    <link rel="stylesheet" href="Style/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
 
 <h3>TestPage</h3>
 
@@ -38,7 +44,7 @@ else
                 <th>Email</th>
                 <th>Age</th>
                 <th>Weight</th>
-                <th> Actions</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -53,18 +59,21 @@ else
                     <td>@user.Email</td>
                     <td>@user.Age</td>
                     <td>@user.Weight</td>
-                    <td><button @onclick="@(() => Delete(user))">Delete</button></td>
-                    <td><button @onclick="GoToEditUser">Edit</button></td>
+                        <td><button class="btn-delete" @onclick="@(() =>Delete(user))"><i class="fas fa-trash-alt"></i></button>
+                        <button class="btn-edit" @onclick="GoToEditUser"><i class="fas fa-pen"></i></button>
+                        <button class="btn-edit" @onclick="@(() => GoToWorkouts())">Workouts</button>
+                    </td>
                 </tr>
             }
         </tbody>
     </table>
 
 
-    <button class="btn btn-primary" @onclick="@(() => GoToAddUser())">Add User</button>
+    <button class="btn btn-primary btn-add" @onclick="@(() => GoToAddUser())">Add User</button>
     
 
 }
+
 
 @code {
     public Users [] UsersList;
@@ -89,7 +98,7 @@ else
 
     async Task Delete(Users user)
     {
-        
+
         await userRepository.DeleteAsync(user.Id);
         UsersList = Users.ToArray();
         await Task.Delay(100);
@@ -100,8 +109,14 @@ else
 
     void GoToEditUser()
     {
-                
+
         NavigationManager.NavigateTo("/edituser");
+    }
+
+    void GoToWorkouts()
+    {
+
+        NavigationManager.NavigateTo("/workouts");
     }
 
 }

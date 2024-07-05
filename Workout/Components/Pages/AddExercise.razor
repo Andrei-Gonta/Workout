@@ -15,14 +15,14 @@
 <h1>AddExercise</h1>
 
 <EditForm Model="newExercise" OnSubmit="Submit" FormName="AddExercise">
-    <div>
+    <div class="form-control">
         <label>
             Name:
-            <InputText @bind-Value="newExercise!.Ex_Name" />
+            <InputText @bind-Value="newExercise!.Ex_Name" class="form-control" />
         </label>
     </div>
     
-    <div><button type="submit">Create Exercise</button></div>
+    <div><button type="submit" class="btn btn-primary">Add Exercise</button></div>
 </EditForm>
 
 

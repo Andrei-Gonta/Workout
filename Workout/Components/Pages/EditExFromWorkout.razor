@@ -1,0 +1,83 @@
+﻿@page "/editexfromworkout={workout_id}&exid={exercise_id}"
+@using Data_Base_Access
+@using Data_Base_Access.Entities
+@using Data_Base_Access.Repositories.NewFolder.IGenericRepository
+@using Data_Base_Access.Repositories.NewFolder.ExercisesRepository
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Web
+@attribute [StreamRendering]
+@rendermode InteractiveServer
+@inject IGenericRepository<Exercises> exRepository
+@inject IGenericRepository<ExercisesLog> exlogRepository
+@inject NavigationManager NavigationManager
+
+
+<h3>EditExFromWorkout</h3>
+
+<EditForm Model="mod_exerciseLog" OnSubmit="Submit" FormName="ModExerciseLog">
+    <div>Exercise</div>
+    <InputSelect @bind-Value="mod_exerciseLog.Id_Exercice">
+        <option value="">Select Exercise</option>
+        @if (exercises != null)
+        {
+            @foreach (var exercise in exercises)
+            {
+                <option value="@exercise.Id">@exercise.Ex_Name</option>
+            }
+        }
+        else
+        {
+            <option disabled>Loading exercises...</option>
+        }
+    </InputSelect>
+    <div class="form-control">
+    </div>
+    <label>
+        Weight:
+        <InputNumber @bind-Value="mod_exerciseLog!.Weight" class="form-control" />
+    </label>
+    <label>
+        Sets:
+        <InputNumber @bind-Value="mod_exerciseLog!.Sets" class="form-control" />
+    </label>
+    <label>
+        Reps:
+        <InputNumber @bind-Value="mod_exerciseLog!.Reps" class="form-control" />
+    </label>
+
+
+    <div><button type="submit" class="btn btn-primary">Edit</button></div>
+</EditForm>
+
+
+
+@code
+{
+    [Parameter]
+    public string workout_id { get; set; }
+    [Parameter]
+    public string exercise_id { get; set; }
+
+    public ExercisesLog mod_exerciseLog = new ExercisesLog();
+    public IEnumerable<Exercises>? exercises;
+
+    public int exerciseId;
+    public int workoutId;
+
+    protected override async Task OnInitializedAsync()
+    {
+        exerciseId = Convert.ToInt32(exercise_id);
+        workoutId = Convert.ToInt32(workout_id);
+        exercises = await exRepository.GetAll();
+        mod_exerciseLog = await exlogRepository.GetExerciseLogByWorkoutAndExerciseId(workoutId, exerciseId) ?? new ExercisesLog();
+    }
+
+    private async Task Submit()
+    {
+        await exlogRepository.UpdateAsync(mod_exerciseLog);
+        NavigationManager.NavigateTo("/workoutdetails={workoutId}");
+    }
+
+}
+

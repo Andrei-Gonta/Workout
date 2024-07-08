@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace Data_Base_Access.Repositories.NewFolder.ExercisesRepository
 {
-    public class ExercisesRrepository : IGenericRepository<Exercises>
+    public class Exercises_Rrepository : IGenericRepository<Exercises>
     {
         private WorkoutContext context;
-        public ExercisesRrepository(WorkoutContext context)
+        public Exercises_Rrepository(WorkoutContext context)
         {
             this.context = context;
         }
@@ -40,12 +40,12 @@ namespace Data_Base_Access.Repositories.NewFolder.ExercisesRepository
             return await context.Exercises.ToListAsync();
         }
 
-        public async Task<Exercises> GetByID(int id)
+        public async Task<Exercises> GetByIDAsync(int id)
         {
             return await context.Exercises.FindAsync(id);
         }
 
-       
+
 
         async Task<Exercises> IGenericRepository<Exercises>.UpdateAsync(Exercises entity)
         {
@@ -59,7 +59,27 @@ namespace Data_Base_Access.Repositories.NewFolder.ExercisesRepository
             throw new NotImplementedException();
         }
 
-        public Users GetID(int id)
+        public Task<IEnumerable<Exercises>> GetWorkoutsByUserId(int userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<ExercisesLog>> GetExerciseLogsByWorkoutId(int workoutId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ExercisesLog> GetExerciseLogByWorkoutAndExerciseId(int workoutId, int exerciseId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<ExercisesLog>> GetExerciseLogByWorkoutAndExerciseId2(int workoutId, int exerciseId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteAsync(int w_id, int e_id)
         {
             throw new NotImplementedException();
         }

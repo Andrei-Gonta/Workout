@@ -24,18 +24,21 @@ namespace Data_Base_Access.Repositories.WorkoutRepository
 
         public async Task AddAsync(Workout item)
         {
-            await context.Workouts.AddAsync(item);
+            await context.Set<Workout>().AddAsync(item);
             await context.SaveChangesAsync();
         }
 
-        public Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var aux = await context.Set<Workout>().FindAsync(id);
+
+            context.Set<Workout>().Remove(aux);
+            await context.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<Workout>> GetAll()
+        public async Task<IEnumerable<Workout>> GetAll()
         {
-            throw new NotImplementedException();
+            return await context.Workouts.Include(u => u.User).Include(el => el.ExercisesLog).ThenInclude(e => e.Exercise).ToListAsync();
         }
 
         /*public async Task<IEnumerable<Workout>> GetInfo(int user_id)
@@ -62,27 +65,45 @@ namespace Data_Base_Access.Repositories.WorkoutRepository
 
         }
 
-        public Task<Workout> GetByID(int id)
+        public async Task<Workout> GetByIDAsync(int id)
         {
-            throw new NotImplementedException();
+            return await context.Workouts.FindAsync(id);
         }
 
-        public Users GetID(int id)
-        {
-            return context.Set<Users>().Find(id);
-        }
-
-        public Task<IEnumerable<Workout>> GetInfo(int user_id)
-        {
-            throw new NotImplementedException();
-        }
+      
 
         public Task<Workout> UpdateAsync(Workout item)
         {
             throw new NotImplementedException();
         }
 
-       
+        public async Task<IEnumerable<Workout>>GetWorkoutsByUserId(int userId)
+        {
+            return await context.Workouts
+                           .Where(w => w.CientID == userId)
+                           .Include(w => w.ExercisesLog)
+                               .ThenInclude(el => el.Exercise)
+                           .ToListAsync();
+        }
 
+        public Task<IEnumerable<ExercisesLog>> GetExerciseLogsByWorkoutId(int workoutId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ExercisesLog> GetExerciseLogByWorkoutAndExerciseId(int workoutId, int exerciseId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<ExercisesLog>> GetExerciseLogByWorkoutAndExerciseId2(int workoutId, int exerciseId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteAsync(int w_id, int e_id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿@page "/edituser"
+﻿@page "/edituser={id}"
 @using Data_Base_Access
 @using Data_Base_Access.Entities
 @using Data_Base_Access.Repositories.NewFolder.IGenericRepository
@@ -8,6 +8,7 @@
 @using Microsoft.AspNetCore.Components
 @using Microsoft.AspNetCore.Components.Web
 @attribute [StreamRendering]
+@rendermode InteractiveServer
 @inject IGenericRepository<Users> userRepository
 @inject NavigationManager NavigationManager
 
@@ -17,31 +18,31 @@
     <div>
         <label>
             Name:
-            <InputText @bind-Value="modUser!.Name"></InputText>
+            <InputText @bind-Value="modUser.Name"></InputText>
         </label>
     </div>
     <div>
         <label>
             Email:
-            <InputText @bind-Value="modUser!.Email" />
+            <InputText @bind-Value="modUser.Email" />
         </label>
     </div>
     <div>
         <label>
             Phone number:
-            <InputText @bind-Value="modUser!.Phone" />
+            <InputText @bind-Value="modUser.Phone" />
         </label>
     </div>
     <div>
         <label>
             Weight:
-            <InputNumber @bind-Value="modUser!.Weight" />
+            <InputNumber @bind-Value="modUser.Weight" />
         </label>
     </div>
     <div>
         <label>
             Age:
-            <InputNumber @bind-Value="modUser!.Age" />
+            <InputNumber @bind-Value="modUser.Age" />
         </label>
     </div>
     <div><button type="submit">Modifiy User</button></div>
@@ -51,19 +52,22 @@
 
 
 @code {
-    private Users modUser;
-    private Users aux;
-    public int userID { get; set; }
+    private Users modUser = new Users();
+    [Parameter]
+    public string id { get; set; }
+    public int user_Id;
 
-    protected override void OnInitialized() => modUser ??= new();
+    protected override async Task OnInitializedAsync()
+    {
+        user_Id = Convert.ToInt32(id);
+        modUser = await userRepository.GetByIDAsync(user_Id) ?? new Users();
+
+    }
 
     private async Task Submit()
     {
-            
-        
-        modUser = userRepository.GetID(userID);
         await userRepository.UpdateAsync(modUser);
-        NavigationManager.NavigateTo("/users");
+        NavigationManager.NavigateTo("/home");
     }
 }
 

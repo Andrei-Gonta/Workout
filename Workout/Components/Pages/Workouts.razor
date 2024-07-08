@@ -1,4 +1,4 @@
-﻿@page "/workouts"
+﻿@page "/workouts={id}"
 @using Data_Base_Access
 @using Data_Base_Access.Entities
 @using Data_Base_Access.Repositories.NewFolder.IGenericRepository
@@ -9,27 +9,31 @@
 @attribute [StreamRendering]
 @rendermode InteractiveServer
 @inject IGenericRepository<Workout> workoutRepository
+@inject IGenericRepository<Users> userRepository
 @inject NavigationManager NavigationManager
 
 
 
 
-<h3>DisplayWorkout for User <var></var></h3>
+<h3>
+    Workouts for <b>@user.Name</b>
+</h3>
+    
 
 @if (WorkoutsList == null)
 {
-    <p><em>Loading...</em></p>
+    <p><em>No Workouts for this user</em></p>
 }
 else
 {
     <table class="table">
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Client ID</th>
+                <th>Client Name</th>
+                <th>Client Surname</th>
                 <th>Duration</th>
                 <th>Date</th>
-                <th>User</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -37,14 +41,15 @@ else
             @foreach (var workout in WorkoutsList)
             {
                 <tr>
-
-                    <td>@workout.Id</td>
                     <td>@workout.CientID</td>
+                    <td>@workout.User.Name</td>
+                    <td>@workout.User.Surname</td>
                     <td>@workout.Duration</td>
                     <td>@workout.Date</td>
-                    <td>@workout.User</td>
                     <td>
-                        <button class="btn-edit">View Info</button>
+                        <button class="btn-edit" @onclick="() => ViewInfo(workout.Id)">View Info</button>
+                    
+                        <button class="btn-delete" @onclick="@(() =>Delete(workout.Id))"><i class="fas fa-trash-alt"></i></button>
                     </td>
                 </tr>
             }
@@ -52,30 +57,44 @@ else
     </table>
 
 
-    <button class="btn btn-primary btn-add" @onclick="@(() => GoToAddWorkout())">Add Workout</button>
+    <button class="btn btn-primary btn-add" @onclick="() => GoToAddWorkout(user.Id)">Add Workout</button>
 
 
 }
 
 @code
 {
-    public List<Workout> WorkoutsList;
+    public IEnumerable<Workout> WorkoutsList;
+    private Users user = new Users();
 
-    public static WorkoutContext context;
-    public int id_client;
+    [Parameter]
+    public string id { get; set; }
+    public int userID;
+
+
+
     protected override async Task OnInitializedAsync()
     {
-
-        await Task.Delay(500);
-       
-        //id_client= 
-        WorkoutsList = await workoutRepository.GetAllWithInclude(w => w.User);
-
+        await Task.Delay(100);
+        userID = Convert.ToInt32(id);
+        user = await userRepository.GetByIDAsync(userID);
+        WorkoutsList = await  workoutRepository.GetWorkoutsByUserId(userID);
     }
 
-    public void GoToAddWorkout()
+    public void GoToAddWorkout(int id)
     {
-        NavigationManager.NavigateTo("/addworkout");
+        NavigationManager.NavigateTo($"/addworkout={id}");
+    }
+
+    void ViewInfo(int id)
+    {
+        NavigationManager.NavigateTo($"/workoutdetails={id}");
+    }
+    async Task Delete(int id)
+    {
+
+        await workoutRepository.DeleteAsync(id);
+        await Task.Delay(100);
     }
 
 }

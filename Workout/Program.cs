@@ -1,5 +1,6 @@
 using Data_Base_Access;
 using Data_Base_Access.Entities;
+using Data_Base_Access.Repositories.NewFolder.Exercises_Logs;
 using Data_Base_Access.Repositories.NewFolder.ExercisesRepository;
 using Data_Base_Access.Repositories.NewFolder.IGenericRepository;
 using Data_Base_Access.Repositories.UsersRepository;
@@ -15,8 +16,9 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddDbContext<WorkoutContext>();
 builder.Services.AddScoped<IGenericRepository<Users>, UserRepository>();
-builder.Services.AddScoped<IGenericRepository<Exercises>, ExercisesRrepository>();
+builder.Services.AddScoped<IGenericRepository<Exercises>, Exercises_Rrepository>();
 builder.Services.AddScoped<IGenericRepository<Data_Base_Access.Entities.Workout >, WorkoutRepository>();
+builder.Services.AddScoped<IGenericRepository<Data_Base_Access.Entities.ExercisesLog>, Exercises_LogsRepository>();
 
 
 

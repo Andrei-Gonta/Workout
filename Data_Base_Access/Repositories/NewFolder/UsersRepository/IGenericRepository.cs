@@ -13,10 +13,8 @@ namespace Data_Base_Access.Repositories.NewFolder.IGenericRepository
     {
 
         Task<IEnumerable<T>> GetAll();
-        
-        Task<T> GetByID(int id);
-        public Users GetID(int id);
-
+        Task<T> GetByIDAsync(int id);
+       // public Users GetID(int id);
 
         Task AddAsync(T item);
 
@@ -24,8 +22,14 @@ namespace Data_Base_Access.Repositories.NewFolder.IGenericRepository
 
         Task DeleteAsync(int id);
 
-        Task<List<T>> GetAllWithInclude(params Expression<Func<T, object>>[] includeProperties);
+       Task<List<T>> GetAllWithInclude(params Expression<Func<T, object>>[] includeProperties);
 
+        Task<IEnumerable<T>> GetWorkoutsByUserId(int userId);
+
+        Task<IEnumerable<ExercisesLog>> GetExerciseLogsByWorkoutId(int workoutId);
+        Task<ExercisesLog> GetExerciseLogByWorkoutAndExerciseId(int workoutId, int exerciseId);
+        Task<IEnumerable<ExercisesLog>> GetExerciseLogByWorkoutAndExerciseId2(int workoutId, int exerciseId);
+         Task DeleteAsync(int w_id, int e_id);
 
 
 

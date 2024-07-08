@@ -32,6 +32,7 @@ else
             <tr>
                 <th>ID</th>
                 <th>Ex_Name</th>
+                <th>Actions</th>
                 
             </tr>
         </thead>
@@ -42,7 +43,7 @@ else
 
                     <td>@ex.Id</td>
                     <td>@ex.Ex_Name</td>
-                    <th> Actions</th>
+                    
                      <td><button class="btn-delete" @onclick="@(() =>Delete(ex))"><i class="fas fa-trash-alt"></i></button>
                         <button class="btn-edit" @onclick="GoToEditExercise"><i class="fas fa-pen"></i></button></td>
                 </tr>

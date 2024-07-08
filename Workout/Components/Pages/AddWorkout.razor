@@ -1,4 +1,4 @@
-﻿@page "/addworkout"
+﻿@page "/addworkout={id}"
 @using Data_Base_Access
 @using Data_Base_Access.Entities
 @using Data_Base_Access.Repositories.NewFolder.IGenericRepository
@@ -10,6 +10,7 @@
 @inject IGenericRepository<Users> userRepository
 @inject IGenericRepository<Workout> workoutRepository
 @inject NavigationManager NavigationManager
+@rendermode InteractiveServer
 
 
 <h1>AddWorkout</h1>
@@ -24,7 +25,7 @@
     <div class="form-control">
         <label>
             Date
-            <input type="date" min="" 2013-01-08"" @bind="newWorkout!.Date" class="form-control" />
+            <input type="date"  @bind="newWorkout!.Date" class="form-control" />
         </label>
     </div>
 
@@ -39,18 +40,25 @@
 @code
 {
 
-    [SupplyParameterFromForm]
-    public Workout newWorkout { get; set; }
-    public Users auxUser;
-    protected override void OnInitialized() => newWorkout ??= new();
+    Workout newWorkout = new Workout();
+    public Users user = new Users();
+    [Parameter]
+    public string id { get; set; }
+    public int userID;
+   
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        userID = Convert.ToInt32(id);
+        user = await userRepository.GetByIDAsync(userID);
+        newWorkout.CientID = user.Id;
+    }
+
     private async Task Submit()
     {
-        if (newWorkout != null)
-        {
-            //newWorkout.CientID=
             await workoutRepository.AddAsync(newWorkout);
-
-            NavigationManager.NavigateTo("/workouts");
+            NavigationManager.NavigateTo($"/workouts={id}");
         }
     }
 }

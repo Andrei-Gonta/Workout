@@ -22,21 +22,6 @@ namespace Data_Base_Access.Repositories.UsersRepository
         {
             this.context = context;
         }
-
-        
-
-        public async Task Delete(int id)
-        {
-            var user = await context.Users.FindAsync(id);
-            if (user != null)
-            {
-                context.Users.Remove(user);
-                await context.SaveChangesAsync();
-                //GetAll();
-            }
-        }
-
-
        
         public async Task<IEnumerable<Users>> GetAll()
         {
@@ -44,40 +29,26 @@ namespace Data_Base_Access.Repositories.UsersRepository
         }
 
 
-        public async Task<Users> GetByID(int id)
+        public async Task<Users> GetByIDAsync(int id)
         {
             return await context.Users.FindAsync(id);
         }
 
-        public Users GetID(int id)
-        {
-            return context.Set<Users>().Find(id);
-        }
+     
 
-
-
-
-
-
-        async Task<Users> IGenericRepository<Users>.UpdateAsync(Users entity)
+        /*async Task<Users> IGenericRepository<Users>.UpdateAsync(Users entity)
         {
             context.Set<Users>().Entry(entity).State = EntityState.Modified;
             await context.SaveChangesAsync();
             return entity;
         }
-
-        public async void Save()
-        {
-            context.SaveChanges();
-        }
-
-
+        */
+  
          async Task IGenericRepository<Users>.AddAsync(Users item)
         {
             await context.Users.AddAsync(item);
             await context.SaveChangesAsync();
 
-                
         }
 
         async Task IGenericRepository<Users>.DeleteAsync(int id)
@@ -89,11 +60,43 @@ namespace Data_Base_Access.Repositories.UsersRepository
             
         }
 
+
+        public virtual async Task<Users> UpdateAsync(Users item)
+        {
+            context.Set<Users>().Entry(item).State = EntityState.Modified;
+            await context.SaveChangesAsync();
+            return item;
+            
+        }
+
         public Task<List<Users>> GetAllWithInclude(params Expression<Func<Users, object>>[] includeProperties)
         {
             throw new NotImplementedException();
         }
 
-        
+        public Task<IEnumerable<Users>> GetWorkoutsByUserId(int userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<ExercisesLog>> GetExerciseLogsByWorkoutId(int workoutId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ExercisesLog> GetExerciseLogByWorkoutAndExerciseId(int workoutId, int exerciseId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<ExercisesLog>> GetExerciseLogByWorkoutAndExerciseId2(int workoutId, int exerciseId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteAsync(int w_id, int e_id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿@page "/testpage"
+﻿@page "/"
 @using Data_Base_Access
 @using Data_Base_Access.Entities
 @using Data_Base_Access.Repositories.NewFolder.IGenericRepository
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
-<h3>TestPage</h3>
+<h3>Users</h3>
 
 <p></p>
 
@@ -60,8 +60,8 @@ else
                     <td>@user.Age</td>
                     <td>@user.Weight</td>
                         <td><button class="btn-delete" @onclick="@(() =>Delete(user))"><i class="fas fa-trash-alt"></i></button>
-                        <button class="btn-edit" @onclick="GoToEditUser"><i class="fas fa-pen"></i></button>
-                        <button class="btn-edit" @onclick="@(() => GoToWorkouts())">Workouts</button>
+                        <button class="btn-edit" @onclick="() => GoToEditUser(user.Id)"><i class="fas fa-pen"></i></button>
+                        <button class="btn-edit" @onclick="() => GoToWorkouts(user.Id)">Workouts</button>
                     </td>
                 </tr>
             }
@@ -85,7 +85,7 @@ else
     protected override async Task OnInitializedAsync()
     {
 
-        await Task.Delay(500);
+        
         Users = await userRepository.GetAll();
         UsersList = Users.ToArray();
 
@@ -102,21 +102,19 @@ else
         await userRepository.DeleteAsync(user.Id);
         UsersList = Users.ToArray();
         await Task.Delay(100);
-
-
     }
 
 
-    void GoToEditUser()
+    void GoToEditUser(int id)
     {
 
-        NavigationManager.NavigateTo("/edituser");
+        NavigationManager.NavigateTo($"/edituser={id}");
     }
 
-    void GoToWorkouts()
+    void GoToWorkouts(int id)
     {
 
-        NavigationManager.NavigateTo("/workouts");
+        NavigationManager.NavigateTo($"/workouts={id}");
     }
 
 }

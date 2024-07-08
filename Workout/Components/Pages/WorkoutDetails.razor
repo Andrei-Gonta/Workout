@@ -1,0 +1,103 @@
+﻿@page "/workoutdetails={id}"
+@using Data_Base_Access
+@using Data_Base_Access.Entities
+@using Data_Base_Access.Repositories.NewFolder.IGenericRepository
+@using Data_Base_Access.Repositories.WorkoutRepository
+@using Data_Base_Access.Repositories.NewFolder.Exercises_Logs
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Web
+@attribute [StreamRendering]
+@rendermode InteractiveServer
+@inject IGenericRepository<Workout> workoutRepository
+@inject IGenericRepository<ExercisesLog> exlogRepository
+@inject IGenericRepository<Users> userRepository
+@inject NavigationManager NavigationManager
+
+
+<h3>WorkoutDetails</h3>
+
+@if (Exercises_Log == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Exercise ID</th>
+                <th>Exercise Name</th>
+                <th>Weight</th>
+                <th>Sets</th>
+                <th>Reps</th>
+                <th>Time Session (minutes)</th>
+                <th>Distance</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var el in Exercises_Log)
+            {
+                <tr>
+                    <td>@el.Id_Exercice</td>
+                    <td>@el.Exercise.Ex_Name</td>
+                    <td>@el.Weight</td>
+                    <td>@el.Sets</td>
+                    <td>@el.Reps</td>
+                    <td>@el.Time_Session</td>
+                    <td>@el.Distance</td>
+                    <td>
+                        <button class="btn-delete" @onclick="@(() =>Delete(el.Id_Workout, el.Id_Exercice))"><i class="fas fa-trash-alt"></i></button>
+                        <button class="btn-edit" @onclick="() => GoToEditExFromWorkout(el.Id_Workout, el.Id_Exercice)"><i class="fas fa-pen"></i></button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <button class="btn btn-primary btn-add" @onclick="@(() => GoToAddExToWorkout(workout_id))">Add Exercise</button>
+    
+}
+
+
+
+
+
+@code
+{
+    public IEnumerable<ExercisesLog>? Exercises_Log;
+    public IEnumerable<Exercises>? Exercises;
+    public Users user = new Users();
+    private Workout workout = new Workout();
+
+    [Parameter]
+    public string id { get; set; }
+    public int workout_id;
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        workout_id = Convert.ToInt32(id);
+        Exercises_Log = await exlogRepository.GetExerciseLogsByWorkoutId(workout_id);
+        workout = await workoutRepository.GetByIDAsync(workout_id);
+    }
+
+    void GoToAddExToWorkout(int id)
+    {
+        NavigationManager.NavigateTo($"/addextoworkout={id}");
+    }
+
+   async Task Delete(int w_id, int e_id)
+    {
+        await exlogRepository.DeleteAsync(w_id, e_id);
+        await Task.Delay(100);
+    }
+
+    async Task GoToEditExFromWorkout(int w_id, int e_id)
+    {
+        NavigationManager.NavigateTo($"/editexfromworkout={w_id}&exid={e_id}");
+    }
+
+
+}

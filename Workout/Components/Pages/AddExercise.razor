@@ -7,24 +7,26 @@
 @using Microsoft.AspNetCore.Components
 @using Microsoft.AspNetCore.Components.Web
 @attribute [StreamRendering]
-
 @inject IGenericRepository<Exercises> exRepository
 @inject IGenericRepository<ExercisesLog> exlogRepository
 @inject NavigationManager NavigationManager
+<body>
+    <h1>AddExercise</h1>
+
+    <EditForm Model="newExercise" OnSubmit="Submit" FormName="AddExercise">
+        <div class="form-control">
+            <label>
+                Name:
+                <InputText @bind-Value="newExercise!.Ex_Name" class="form-control" />
+            </label>
+        </div>
+            
+        <div><button type="submit" class="btn btn-primary">Add Exercise</button></div>
+    </EditForm>
 
 
-<h1>AddExercise</h1>
 
-<EditForm Model="newExercise" OnSubmit="Submit" FormName="AddExercise">
-    <div class="form-control">
-        <label>
-            Name:
-            <InputText @bind-Value="newExercise!.Ex_Name" class="form-control" />
-        </label>
-    </div>
-    
-    <div><button type="submit" class="btn btn-primary">Add Exercise</button></div>
-</EditForm>
+</body>
 
 
 

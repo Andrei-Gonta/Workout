@@ -15,16 +15,6 @@
 @inject NavigationManager NavigationManager
 
 <PageTitle>Users</PageTitle>
-<head>
-    <link rel="stylesheet" href="Style/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
-
-<h3>Users</h3>
-
-<p></p>
-
-
 
 
 
@@ -34,6 +24,10 @@
 }
 else
 {
+    <h3>Clients List</h3>
+    
+    
+        
     <table class="table">
         <thead>
             <tr>
@@ -59,19 +53,22 @@ else
                     <td>@user.Email</td>
                     <td>@user.Age</td>
                     <td>@user.Weight</td>
-                        <td><button class="btn-delete" @onclick="@(() =>Delete(user))"><i class="fas fa-trash-alt"></i></button>
-                        <button class="btn-edit" @onclick="() => GoToEditUser(user.Id)"><i class="fas fa-pen"></i></button>
-                        <button class="btn-edit" @onclick="() => GoToWorkouts(user.Id)">Workouts</button>
+                        <td>
+                            <button class=" btn-delete" @onclick="() => Delete(user)">X</button>
+                            <button class="  btn-edit" @onclick="() => GoToEditUser(user.Id)">#</button>
+                            <button class="  btn-workout" @onclick="() => GoToWorkouts(user.Id)">Workouts</button>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
-
-
-    <button class="btn btn-primary btn-add" @onclick="@(() => GoToAddUser())">Add User</button>
+        <button class="btn btn-primary btn-add" @onclick="@(() => GoToAddUser())">Add User</button>
+    
+   
+    
     
 
+    
 }
 
 

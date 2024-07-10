@@ -72,7 +72,7 @@
     private async Task Submit()
     {
         await exlogRepository.AddAsync(exerciseLog);
-        NavigationManager.NavigateTo($"/workoutdetails ={ id}");
+        NavigationManager.NavigateTo($"/workoutdetails={workout_id}");
     }
 
 

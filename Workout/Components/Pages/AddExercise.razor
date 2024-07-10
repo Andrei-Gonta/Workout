@@ -10,44 +10,49 @@
 @inject IGenericRepository<Exercises> exRepository
 @inject IGenericRepository<ExercisesLog> exlogRepository
 @inject NavigationManager NavigationManager
-<body>
-    <h1>AddExercise</h1>
 
-    <EditForm Model="newExercise" OnSubmit="Submit" FormName="AddExercise">
-        <div class="form-control">
-            <label>
-                Name:
-                <InputText @bind-Value="newExercise!.Ex_Name" class="form-control" />
-            </label>
-        </div>
-            
-        <div><button type="submit" class="btn btn-primary">Add Exercise</button></div>
-    </EditForm>
+    <h1>Add Exercise</h1>
 
+ 
+        <body>
+        <center>
+        <EditForm Model="newExercise" OnSubmit="Submit" FormName="AddExercise" class="form">
+            <div class="transparent-form">
+                <label class="transparent-form">
+                    Name:
+                    <InputText @bind-Value="newExercise!.Ex_Name" class="form-control" />
+                </label>
+            </div>
 
+            <div><button type="submit" class="btn-add">Add Exercise</button></div>
+        </EditForm>
 
-</body>
-
-
-
-
+    </center>
+    </body>
 
 
-@code
-{
 
-    [SupplyParameterFromForm]
-    public Exercises newExercise { get; set; }
-    protected override void OnInitialized() => newExercise ??= new();
-    private async Task Submit()
+
+
+
+
+
+
+    @code
     {
-        if (newExercise != null)
-        {
-            await exRepository.AddAsync(newExercise);
 
-            NavigationManager.NavigateTo("/exercicespage");
+        [SupplyParameterFromForm]
+        public Exercises newExercise { get; set; }
+        protected override void OnInitialized() => newExercise ??= new();
+        private async Task Submit()
+        {
+            if (newExercise != null)
+            {
+                await exRepository.AddAsync(newExercise);
+
+                NavigationManager.NavigateTo("/exercicespage");
+            }
         }
     }
-}
 
 

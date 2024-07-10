@@ -16,7 +16,7 @@
 
 
 <h3>
-    Workouts for <b>@user.Name</b>
+    Workouts for <b>@user.Name @user.Surname</b>
 </h3>
     
 
@@ -46,10 +46,10 @@ else
                     <td>@workout.User.Surname</td>
                     <td>@workout.Duration</td>
                     <td>@workout.Date</td>
-                    <td>
-                        <button class="btn-edit" @onclick="() => ViewInfo(workout.Id)">View Info</button>
+                    <td class="actions">
+                        <button class="btn-info" @onclick="() => ViewInfo(workout.Id)">View Info</button>
                     
-                        <button class="btn-delete" @onclick="@(() =>Delete(workout.Id))"><i class="fas fa-trash-alt"></i></button>
+                        <button class="btn-delete" @onclick="@(() =>Delete(workout.Id))">Delete</button>
                     </td>
                 </tr>
             }

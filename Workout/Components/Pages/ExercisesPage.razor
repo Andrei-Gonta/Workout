@@ -12,12 +12,9 @@
 @inject NavigationManager NavigationManager
 
 <PageTitle>Exercises</PageTitle>
-<head>
-    <link rel="stylesheet" href="Style/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
 
-<h3>Exercises</h3>
+
+<h3>Exercises List</h3>
 
 <p></p>
 
@@ -44,8 +41,8 @@ else
                     <td>@ex.Id</td>
                     <td>@ex.Ex_Name</td>
                     
-                     <td><button class="btn-delete" @onclick="@(() =>Delete(ex))"><i class="fas fa-trash-alt"></i></button>
-                        <button class="btn-edit" @onclick="GoToEditExercise"><i class="fas fa-pen"></i></button></td>
+                     <td><button class="btn-delete" @onclick="@(() =>Delete(ex))">Delete</button>
+                        <button class="btn-edit" @onclick="GoToEditExercise">Edit</button></td>
                 </tr>
             }
         </tbody>

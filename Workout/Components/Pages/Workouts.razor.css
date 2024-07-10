@@ -1,13 +1,11 @@
-﻿/* TestPage.razor.css */
-
-* {
+﻿* {
     margin: 0;
     padding: 0;
 }
 
 
 body {
-    background-color:transparent;    
+    background-color: transparent;
     color: white;
     font-weight: bold;
     background-position: center; /* Imaginea va fi centrată */
@@ -24,7 +22,6 @@ h3 {
     margin-bottom: 20px;
     background-color: transparent;
     color: white;
-   
 }
 
 table {
@@ -41,12 +38,10 @@ table {
     color: white;
     margin-top: 30px;
     margin-bottom: 20px;
-    
 }
 
 th, td {
     border: 3px solid white;
-    padding: 8px;
     text-align: left;
 }
 
@@ -57,9 +52,13 @@ th {
     font-weight: bold;
 }
 
-td {
+td. {
     font-size: 15px;
     color: white;
+}
+actions {
+    font-size: 15px;
+    text-align: right;
 }
 
 button.btn-add {
@@ -68,27 +67,22 @@ button.btn-add {
     color: white;
     font-weight: bold;
     font-size: 16px;
-    padding: 5px;
+    
 }
-button.btn-delete{
+
+
+button.btn-info {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    margin-right: 5px;
+}
+button.btn-delete {
     background-color: transparent;
     color: red;
     font-weight: bold;
+    margin-left: 3px;
+    margin-right:0;
 }
-button.btn-edit{
-    background-color: transparent;
-    
-    color: white;
-    font-weight: bold;
-}
-button.btn-workout {
-    background-color: transparent;
-    
-    color: white;
-    font-weight: bold;
-}
-
-    button.btn-add:hover {
-        background-color: white;
-        color: gray;
-    }

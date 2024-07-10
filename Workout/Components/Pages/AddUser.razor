@@ -12,48 +12,50 @@
 @inject NavigationManager NavigationManager
 
 
-<h1>AddUser</h1>
-
-<EditForm Model="newUser" OnSubmit="Submit" FormName="AddUser">
-    <div class="form-control">
+<h1>Create new client   </h1>
+<body>
+    <center>
+<EditForm Model="newUser" OnSubmit="Submit" FormName="AddUser" class="form">
+    <div class="transparent-form">
         <label>
-            Name: 
-            <InputText @bind-Value="newUser!.Name" class="form-control" />
+           Name:    
+          <InputText @bind-Value="newUser!.Name" class="form-control" />
         </label>
     </div>
-    <div class="form-control">
+    <div class="transparent-form">
         <label>
             Surname:
             <InputText @bind-Value="newUser!.Surname" class="form-control" />
         </label>
     </div>
-    <div class="form-control">
+    <div class="transparent-form">
         <label>
             Email:
             <InputText @bind-Value="newUser!.Email" class="form-control" />
         </label>
     </div>
-    <div class="form-control">
+    <div class="transparent-form">
         <label>
             Phone number:
             <InputText @bind-Value="newUser!.Phone" class="form-control" />
         </label>
     </div>
-    <div class="form-control">
+    <div class="transparent-form">
         <label>
             Weight:
             <InputNumber @bind-Value="newUser!.Weight" class="form-control" />
         </label>
     </div>
-    <div    >
+    <div class="transparent-form"   >
         <label>
             Age:
             <InputNumber @bind-Value="newUser!.Age" class="form-control" />
         </label>
     </div>
-    <div><button type="submit" class="btn btn-primary">Add User</button></div>
+    <div><button type="submit" class="btn-add">Add User</button></div>
 </EditForm>
-
+</center>
+</body>
 
 
 

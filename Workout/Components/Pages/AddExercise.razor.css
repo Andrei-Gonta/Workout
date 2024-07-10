@@ -1,0 +1,65 @@
+﻿h1 {
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: transparent;
+    color: white;
+}
+
+
+
+label {
+    font-weight: bold;
+    background-color: transparent;
+    margin-bottom: 20px;
+    .form-control
+
+{
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+}
+
+}
+
+
+.btn-add {
+    background-color: transparent; /* Makes the background transparent */
+    color: white; /* Changes the text color to white */
+    border: 2px solid white; /* Adds a white border */
+    padding: 10px 20px; /* Adds some padding for better appearance */
+    font-size: 16px; /* Adjusts the font size */
+    cursor: pointer; /* Changes the cursor to a pointer on hover */
+    margin-bottom: 40px;
+}
+
+.transparent-form {
+    background-color: transparent; /* Makes the form background transparent */
+    color: white; /* Sets the text color to white */
+    width: 50%;
+    margin-bottom: 10px;
+}
+
+.form {
+    width: 300px;
+    height: 300px;
+    display: grid;
+    place-content: center;
+    /* Add a transparency to the background
+               using rgba value */
+    background: rgba(255, 255, 255, 0.1);
+    /* Add a transparency to shadow */
+    box-shadow: 0 26px 42px rgba(0, 0, 0, 0.1);
+}
+
+transparent-input {
+    background-color: transparent;
+}
+
+input {
+    background-color: transparent;
+    width: 250px;
+    height: 40px;
+    font-size: 24px;
+    border: 1px solid #383535;
+}

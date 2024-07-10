@@ -1,25 +1,25 @@
 ﻿h1 {
     font-weight: bold;
-    margin-top: 45px;
-    margin-bottom: 10px;
+    margin-top: 60px;
+    margin-bottom: 60px;
     background-color: transparent;
     color: white;
-    font-size:34px;
+    font-size: 34px;
 }
 
 
 
 label {
-
     font-weight: bold;
     background-color: transparent;
     margin-bottom: 10px;
     .form-control
+
 {
     background-color: transparent;
     color: white;
-    
 }
+
 }
 
 
@@ -37,17 +37,28 @@ label {
     .lbl
 
 {
-    margin-top: 12px;
+    margin-top: 23px;
+}
+.data {
+    margin-left: 0px;
+    width: 110%;
+    text-align:center;
+
+    .d
+{
+    color: white
+    
+    margin-right: 200px;
+}
 }
     background-color: transparent; /* Makes the form background transparent */
     color: white; /* Sets the text color to white */
     
-    width: 40%;
+    width: 70%;
     margin-bottom: 10px;
 }
 
 .form {
-    
     width: 300px;
     height: 300px;
     display: grid;
@@ -57,6 +68,7 @@ label {
     background: rgba(255, 255, 255, 0.1);
     /* Add a transparency to shadow */
     box-shadow: 0 26px 42px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
 }
 
 transparent-input {
@@ -71,10 +83,10 @@ input {
     border: 1px solid #383535;
 }
 
-
 .shape {
     border-radius: 10px;
-    height: 580px;
-    width: 400px;
+    height: 330px;
+    width: 300px;
     background-color: rgba(0,0,0,.5)
 }
+

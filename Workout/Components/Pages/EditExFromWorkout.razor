@@ -13,10 +13,12 @@
 @inject NavigationManager NavigationManager
 
 
-<h3>EditExFromWorkout</h3>
-
-<EditForm Model="mod_exerciseLog" OnSubmit="Submit" FormName="ModExerciseLog">
-    <div>Exercise</div>
+<h1>Edit Exercise</h1>
+<center>
+    <div class=" shape">
+<EditForm Model="mod_exerciseLog" OnSubmit="Submit" FormName="ModExerciseLog" class=" form">
+    <div class="transparent-form">       
+    <div class="lbl">Select Exercise</div>
     <InputSelect @bind-Value="mod_exerciseLog.Id_Exercice">
         <option value="">Select Exercise</option>
         @if (exercises != null)
@@ -31,24 +33,45 @@
             <option disabled>Loading exercises...</option>
         }
     </InputSelect>
-    <div class="form-control">
     </div>
+    
+    <div class="transparent-form">
     <label>
         Weight:
         <InputNumber @bind-Value="mod_exerciseLog!.Weight" class="form-control" />
     </label>
+    </div>
+    <div class="transparent-form">
     <label>
         Sets:
         <InputNumber @bind-Value="mod_exerciseLog!.Sets" class="form-control" />
     </label>
+    </div>
+    <div class="transparent-form">
     <label>
         Reps:
         <InputNumber @bind-Value="mod_exerciseLog!.Reps" class="form-control" />
     </label>
+    </div>
+            <div class="transparent-form">
+                <label>
+                    Time Session (minutes):
+                    <InputNumber @bind-Value="mod_exerciseLog!.Time_Session" class="form-control" />
+                </label>
+            </div>
+            <div class="transparent-form">
+                <label>
+                    Distane (km):
+                    <InputNumber @bind-Value="mod_exerciseLog!.Distance" class="form-control" />
+                </label>
+            </div>
 
 
-    <div><button type="submit" class="btn btn-primary">Edit</button></div>
+
+    <div><button type="submit" class="btn-add">Edit</button></div>
 </EditForm>
+</div>
+</center>
 
 
 

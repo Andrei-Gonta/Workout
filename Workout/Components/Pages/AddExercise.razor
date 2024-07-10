@@ -11,22 +11,23 @@
 @inject IGenericRepository<ExercisesLog> exlogRepository
 @inject NavigationManager NavigationManager
 
-    <h1>Add Exercise</h1>
+    <h1>Add new exercise</h1>
 
  
         <body>
         <center>
+             <div class=" shape">
         <EditForm Model="newExercise" OnSubmit="Submit" FormName="AddExercise" class="form">
             <div class="transparent-form">
-                <label class="transparent-form">
-                    Name:
+                    <label class="lbl">
+                    Exercise Name:
                     <InputText @bind-Value="newExercise!.Ex_Name" class="form-control" />
                 </label>
             </div>
 
             <div><button type="submit" class="btn-add">Add Exercise</button></div>
         </EditForm>
-
+        </div>
     </center>
     </body>
 

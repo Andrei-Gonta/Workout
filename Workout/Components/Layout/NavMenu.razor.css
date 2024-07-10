@@ -16,8 +16,10 @@
 }
 
 .top-row {
-    height: 3.5rem;
-    background-color: rgba(0,0,0,0.4);
+    ;
+    height: 4rem;
+
+    box-shadow: inset 0 0 12em 2.6em #000;
 }
 
 .navbar-brand {
@@ -82,7 +84,11 @@
 }
 
 .nav-scrollable {
-    display: none;
+    
+    box-shadow: inset 0 0 12em 2.6em #000;
+    height: 20px;
+    
+    /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
 
 .navbar-toggler:checked ~ .nav-scrollable {
@@ -99,7 +105,7 @@
         display: block;
 
         /* Allow sidebar to scroll for tall menus */
-        height: calc(100vh - 3.5rem);
+        height: calc(100vh - 4rem);
         overflow-y: auto;
     }
 }

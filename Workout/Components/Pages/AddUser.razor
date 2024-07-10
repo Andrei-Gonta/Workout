@@ -14,10 +14,12 @@
 
 <h1>Create new client   </h1>
 <body>
+    
     <center>
+        <div class=" shape">
 <EditForm Model="newUser" OnSubmit="Submit" FormName="AddUser" class="form">
     <div class="transparent-form">
-        <label>
+        <label class="lbl">
            Name:    
           <InputText @bind-Value="newUser!.Name" class="form-control" />
         </label>
@@ -54,7 +56,9 @@
     </div>
     <div><button type="submit" class="btn-add">Add User</button></div>
 </EditForm>
+        </div>
 </center>
+    
 </body>
 
 

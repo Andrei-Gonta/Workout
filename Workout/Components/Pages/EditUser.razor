@@ -12,41 +12,45 @@
 @inject IGenericRepository<Users> userRepository
 @inject NavigationManager NavigationManager
 
-<h3>EditUser</h3>
+<h1 >Edit Client @modUser.Name @modUser.Surname</h1>
 
-<EditForm Model="modUser" OnSubmit="Submit" FormName="ModifyUser">
-    <div>
-        <label>
+<center >
+    <div class=" shape">
+<EditForm Model="modUser" OnSubmit="Submit" FormName="ModifyUser" class=" form">
+    <div class="transparent-form ">
+                <label class="lbl">
             Name:
-            <InputText @bind-Value="modUser.Name"></InputText>
+            <InputText @bind-Value="modUser.Name" class="form-control"></InputText>
         </label>
     </div>
-    <div>
+    <div class="transparent-form ">
         <label>
             Email:
-            <InputText @bind-Value="modUser.Email" />
+            <InputText @bind-Value="modUser.Email" class="form-control" />
         </label>
     </div>
-    <div>
+    <div class="transparent-form ">
         <label>
             Phone number:
-            <InputText @bind-Value="modUser.Phone" />
+            <InputText @bind-Value="modUser.Phone" class="form-control" />
         </label>
     </div>
-    <div>
+    <div class ="transparent-form ">
         <label>
             Weight:
-            <InputNumber @bind-Value="modUser.Weight" />
+            <InputNumber @bind-Value="modUser.Weight" class="form-control" />
         </label>
     </div>
-    <div>
+    <div class="transparent-form ">
         <label>
             Age:
-            <InputNumber @bind-Value="modUser.Age" />
+            <InputNumber @bind-Value="modUser.Age" class="form-control" />
         </label>
     </div>
-    <div><button type="submit">Modifiy User</button></div>
+    <div><button type="submit" class="btn-add">Modifiy Client</button></div>
 </EditForm>
+</div>
+</center>
 
 
 

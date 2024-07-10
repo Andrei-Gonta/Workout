@@ -1,9 +1,10 @@
 ﻿h1 {
     font-weight: bold;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 60px;
+    margin-bottom: 60px;
     background-color: transparent;
     color: white;
+    font-size: 34px
 }
 
 
@@ -34,9 +35,15 @@ label {
 }
 
 .transparent-form {
+    .lbl
+
+{
+    margin-top: 12px;
+   
+}
     background-color: transparent; /* Makes the form background transparent */
     color: white; /* Sets the text color to white */
-    width: 50%;
+    width: 70%;
     margin-bottom: 10px;
 }
 
@@ -62,4 +69,10 @@ input {
     height: 40px;
     font-size: 24px;
     border: 1px solid #383535;
+}
+.shape {
+    border-radius: 10px;
+    height: 180px;
+    width: 290px;
+    background-color: rgba(0,0,0,.5)
 }

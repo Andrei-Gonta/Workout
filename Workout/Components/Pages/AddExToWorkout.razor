@@ -12,13 +12,15 @@
 @inject IGenericRepository<ExercisesLog> exlogRepository
 @inject NavigationManager NavigationManager
 
-<h3>AddExToWorkout</h3>
+<h1>Add a new exercise </h1>
 
 
-<EditForm Model="exerciseLog" OnSubmit="Submit" FormName="AddExerciseLog">
-    <div>Exercise</div>
-    <InputSelect @bind-Value="exerciseLog.Id_Exercice">
-        <option value="">Select Exercise</option>
+    <center>
+          <div class=" shape">
+    <EditForm Model="exerciseLog" OnSubmit="Submit" FormName="AddExerciseLog" class="form">
+
+            <InputSelect @bind-Value="exerciseLog.Id_Exercice" class="select">
+                <option value="" class="lbl" >Select Exercise</option>
         @if (exercises != null)
         {
             @foreach (var exercise in exercises)
@@ -31,25 +33,44 @@
             <option disabled>Loading exercises...</option>
         }
     </InputSelect>
-    <div class="form-control">
-        
-    </div>
+   
+    <div class="transparent-form">
         <label>
             Weight:
             <InputNumber @bind-Value="exerciseLog!. Weight" class="form-control" />
         </label>
+    </div>
+     <div class="transparent-form">
         <label>
             Sets:
             <InputNumber @bind-Value="exerciseLog!. Sets" class="form-control" />
         </label>
+    </div>
+    <div class="transparent-form">
         <label>
             Reps:
             <InputNumber @bind-Value="exerciseLog!. Reps" class="form-control" />
         </label>
+         </div>
+        <div class="transparent-form">
+            <label>
+                Time Session (minutes):
+                <InputNumber @bind-Value="exerciseLog!.Time_Session" class="form-control" />
+            </label>
+        </div>
+        <div class="transparent-form">
+            <label>
+                Distance (km):
+                <InputNumber @bind-Value="exerciseLog!.Distance" class="form-control" />
+            </label>
+        </div>
     
 
-    <div><button type="submit" class="btn btn-primary">Add Exercise</button></div>
+    <div><button type="submit" class="btn-add">Add Exercise</button></div>
 </EditForm>
+</div>
+</center>>
+
 
 
 

@@ -13,24 +13,29 @@
 @rendermode InteractiveServer
 
 
-<h1>AddWorkout</h1>
-
-<EditForm Model="newWorkout" OnSubmit="Submit" FormName="AddWorkout">
-    <div class="form-control">
-        <label>
+<h1>Add new workout for @user.Name @user.Surname</h1>
+<center>
+    <div class=" shape">
+<EditForm Model="newWorkout" OnSubmit="Submit" FormName="AddWorkout" class="form">
+    <div class="transparent-form">
+        <label class=" lbl">
             Duration (Minutes):   
             <InputNumber @bind-Value="newWorkout!.Duration" class="form-control" />
         </label>
     </div>
-    <div class="form-control">
-        <label>
-            Date
+    <div class="transparent-form">
+                <label class ="data">
+              
+           <div class="d">Date</div>
             <input type="date"  @bind="newWorkout!.Date" class="form-control" />
+                    
         </label>
     </div>
 
-    <div><button type="submit" class="btn btn-primary">Add Workout</button></div>
+    <div><button type="submit" class="btn-add">Add Workout</button></div>
 </EditForm>
+</div>
+</center>
 
 
 
